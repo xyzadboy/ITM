@@ -16,7 +16,6 @@ class Tickets extends Model
     protected $fillable = [
         'nomor_tiket',
         'pelapor_id',
-        'kategori_tiket_id',
         'prioritas_tiket_id',
         'agent_id',
         'deskripsi',

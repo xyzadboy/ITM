@@ -16,15 +16,19 @@ use Filament\Tables\Table;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Model;
+
 
 
 class PegawaiResource extends Resource
 {
     protected static ?string $model = Pegawai::class;
+    
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = 'clarity-employee-group-line';
 
-    protected static ?string $recordTitleAttribute = 'Pegawai';
+    protected static ?string $pluralModelLabel = 'Data Pegawai';
+
 
     public static function form(Schema $schema): Schema
     {

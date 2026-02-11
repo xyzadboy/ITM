@@ -2,9 +2,11 @@
 
 namespace App\Filament\Resources\Departemens\Pages;
 
+use App\Filament\Resources\Departemens\RelationManagers\TicketPrioritiesRelationManager;
 use App\Filament\Resources\Departemens\DepartemenResource;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
+
 
 class EditDepartemen extends EditRecord
 {
@@ -14,6 +16,12 @@ class EditDepartemen extends EditRecord
     {
         return [
             DeleteAction::make(),
+        ];
+    }
+      public function getRelationManagers(): array
+    {
+        return [
+            TicketPrioritiesRelationManager::class,
         ];
     }
 }

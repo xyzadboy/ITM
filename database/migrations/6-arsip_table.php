@@ -10,37 +10,14 @@ return new class extends Migration
     {
         Schema::create('arsip', function (Blueprint $table) {
             $table->id();
-
-            // relasi ke ticket (TIDAK cascade)
             $table->unsignedBigInteger('ticket_id');
-            // snapshot nomor tiket
             $table->string('no_tiket');
-
-            // pelapor
-            $table->foreignId('pelapor_id')
-                ->nullable()
-                ->constrained('users')
-                ->nullOnDelete();
-
-            // agent
-            $table->foreignId('agent_id')
-                ->nullable()
-                ->constrained('pegawai')
-                ->nullOnDelete();
-
-            // kategori tiket
-            $table->foreignId('kategori_tiket_id')
-                ->nullable()
-                ->constrained('kategori_tiket')
-                ->nullOnDelete();
-
-            // snapshot deskripsi
+            $table->foreignId('pelapor_id')->nullable()->constrained('pegawai')->nullOnDelete();
+            $table->foreignId('agent_id')->nullable() ->nullOnDelete();
+            $table->foreignId('prioritas_id')->nullable()->constrained('prioritas_tiket')->nullOnDelete();
             $table->text('deskripsi');
             $table->string('status')->default('resolved');
-
-            // waktu resolve
             $table->timestamp('resolved_at')->nullable();
-
             $table->timestamps();
         });
     }

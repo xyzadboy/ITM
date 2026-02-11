@@ -12,9 +12,13 @@ use Filament\Tables\Columns\SelectColumn;
 class TicketsTable
 {
 
+
+    protected $listeners = [
+    'TicketChanged' => '$refresh',
+    ];
+
     public static function configure(Table $table): Table 
     {
-        // return TicketsTable::configure($table);
         return $table
             ->poll('3s')
             ->columns([
@@ -25,8 +29,11 @@ class TicketsTable
                 TextColumn::make('pelapor.nama')
                     ->label('Pelapor')
                     ->sortable(),
-                TextColumn::make('kategori_tiket.nama_kategori_tiket')
-                    ->label('Kategori Tiket')
+                TextColumn::make('prioritas_tiket.nama_prioritas_tiket')
+                    ->label('Perihal')
+                    ->sortable(),
+                TextColumn::make('prioritas_tiket.level_prioritas')
+                    ->label('Level Prioritas')
                     ->sortable(),
                 TextColumn::make('agent.nama')
                     ->label('Agent')
@@ -35,12 +42,6 @@ class TicketsTable
                 TextColumn::make('deskripsi'),
                 TextColumn::make('status')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
-                        'open'=> 'gray',
-                        'in progress' => 'warning',
-                        'resolved' => 'success',
-                        'rejected' => 'danger',
-                    })
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('deskripsi'),

@@ -14,15 +14,25 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Filament\Forms\Components\TextInput;
+use Filament\Actions\Action;
+use Filament\Forms\Components\Toggle;
+
+
 
 
 class DepartemenResource extends Resource
 {
     protected static ?string $model = Departemen::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    // protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    // protected static ?string $navigationIcon = 'heroicon-o-building-office';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-building-office';
+    
+
 
     protected static ?string $recordTitleAttribute = 'departemen';
+
+
 
     public static function form(Schema $schema): Schema
     {
@@ -48,7 +58,7 @@ class DepartemenResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            TicketPrioritiesRelationManager::class,
         ];
     }
 
@@ -56,7 +66,8 @@ class DepartemenResource extends Resource
     {
         return [
             'index' => ListDepartemens::route('/'),
-            // 'create' => CreateDepartemen::route('/create'),
+            'create' => CreateDepartemen::route('/create'),
+            'edit' => EditDepartemen::route('/{record}/edit'),
         ];
     }
 }

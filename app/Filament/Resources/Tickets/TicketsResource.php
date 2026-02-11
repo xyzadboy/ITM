@@ -21,7 +21,11 @@ class TicketsResource extends Resource
 {
     protected static ?string $model = Tickets::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = 'ionicon-ticket-outline';
+
+    protected static ?string $recordTitleAttribute = 'Prioritas Tiket';
+    
+
 
     public static function form(Schema $schema): Schema
     {
@@ -31,10 +35,10 @@ class TicketsResource extends Resource
                 ->label('Pelapor')
                 ->required()
                 ->relationship('pegawai', 'nama'),
-            Select::make('kategori_tiket_id')
+            Select::make('prioritas_tiket_id')
                 ->label('Kategori Tiket')
                 ->required()
-                ->relationship('kategori_tiket', 'nama_kategori_tiket'),
+                ->relationship('prioritas_tiket', 'nama_prioritas_tiket'),
         
             Select::make('agent_id')
                 ->label('Agent')
@@ -43,14 +47,14 @@ class TicketsResource extends Resource
                         titleAttribute: 'nama',
                         modifyQueryUsing: function ($query, $record, $get) {
 
-                            $kategoriId = $get('kategori_tiket_id'); // ✅ FIX
+                            $kategoriId = $get('prioritas_tiket_id'); // ✅ FIX
 
                             // filter agent berdasarkan departemen kategori
                             if ($kategoriId) {
                                 $query->whereHas('departemen', function ($q) use ($kategoriId) {
                                     $q->whereIn('id', function ($sub) use ($kategoriId) {
                                         $sub->select('departemen_id')
-                                            ->from('kategori_tiket')
+                                            ->from('prioritas_tiket')
                                             ->where('id', $kategoriId);
                                     });
                                 });

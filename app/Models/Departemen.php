@@ -33,9 +33,13 @@ class Departemen extends Model
         return $this->hasMany(Pegawai::class, 'departemen_id');
 
     }
-    public function priortastiket(): HasMany
-    {
-        return $this->hasMany(PrioritasTiket::class, 'departemen_id');
+    // public function priortastiket(): HasMany
+    // {
+    //     return $this->hasMany(PrioritasTiket::class, 'departemen_id');
 
+    // }
+        public function prioritastiket()
+    {
+        return $this->hasMany(\App\Models\PrioritasTiket::class);
     }
 }

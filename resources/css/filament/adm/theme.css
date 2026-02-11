@@ -1,0 +1,28 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@source '../../../../app/Filament/**/*';
+@source '../../../../resources/views/filament/**/*';
+
+@theme{
+    --color-main-primary: rgb(242, 241, 235);
+    --color-main-secondary: rgb(207, 192, 181);
+    --color-main-black: rgb(40, 43 ,47);
+    --color-main-white: rgb(255, 255, 255);
+    --color-main-accent: rgb(241, 202, 59);
+}
+
+.fi-body{
+    @apply bg-main-primary text-main-black;
+}
+.fi-topbar{
+    @apply bg-main-primary shadow-none ring-0;
+}
+.fi-sidebar-nav{
+    @apply bg-main-white;
+}
+.fi-sidebar {
+    @apply m-4 rounded-3xl shadow-xl border-none sticky top-4 overflow-hidden h-auto;
+
+    /* max-height: calc(100vh - 2rem); */
+}
+

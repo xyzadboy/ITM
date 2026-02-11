@@ -18,6 +18,8 @@ use Filament\Forms\Components\TextInput;
 class PrioritasTiketResource extends Resource
 {
     protected static ?string $model = PrioritasTiket::class;
+    
+    protected static bool $shouldRegisterNavigation = false;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
@@ -30,9 +32,6 @@ class PrioritasTiketResource extends Resource
                 ->required()
                 ->maxLength(255),
             TextInput::make('level_prioritas')
-                ->required(),
-            TextInput::make('warna')
-                ->label('Warna')
                 ->required(),
             TextInput::make('keterangan')
                 ->label('Keterangan')

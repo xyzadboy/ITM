@@ -30,8 +30,9 @@ class AdmPanelProvider extends PanelProvider
             ->default()
             ->id('adm')
             ->path('adm')
+            ->viteTheme('resources/css/filament/adm/theme.css')
             ->login(CustomLogin::class)
-            // ->registration(CustomRegist::class)
+     // ->registration(CustomRegist::class)
             ->passwordReset()
             ->emailVerification()
             // ->authguard('web')
@@ -47,7 +48,6 @@ class AdmPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
                 AccountWidget::class,
-                FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

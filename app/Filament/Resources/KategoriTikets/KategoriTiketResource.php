@@ -20,7 +20,10 @@ class KategoriTiketResource extends Resource
 {
     protected static ?string $model = KategoriTiket::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    // protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = 'iconsax-bro-category-2';
+
+
 
     public static function form(Schema $schema): Schema
     {

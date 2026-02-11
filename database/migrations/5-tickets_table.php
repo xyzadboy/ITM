@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nomor_tiket')->unique();
             $table->foreignId('pelapor_id')->constrained('pegawai')->onDelete('cascade');
-            $table->foreignId('kategori_tiket_id')->constrained('kategori_tiket')-> onDelete('cascade');
-            // $table->foreignId('prioritas_tiket_id')->constrained('prioritas_tiket')->nullable()-> onDelete('cascade');
+            $table->foreignId('prioritas_tiket_id')->constrained('prioritas_tiket')->onDelete('no action');
             $table->foreignId('agent_id')->nullable()->constrained('pegawai')->onDelete('set null');
             $table->text('deskripsi');
             $table->string('status')->default('waiting for response');

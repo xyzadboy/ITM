@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('prioritas_tiket', function (Blueprint $table) {
             $table->id();
             $table->string('nama_prioritas_tiket');
+            $table->foreignId('departemen_id')->constrained('departemen')->onDelete('cascade');
             $table->string('level_prioritas');
-            $table->string('warna')->nullable();
             $table->string('keterangan')->nullable();
             $table->timestamps();
         });

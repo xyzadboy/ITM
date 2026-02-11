@@ -19,8 +19,6 @@ class PrioritasTiketsTable
                     ->searchable(),
                 TextColumn::make('level_prioritas')
                     ->searchable(),
-                TextColumn::make('warna')
-                    ->searchable(),
                 TextColumn::make('keterangan')
                     ->searchable(),
             ])

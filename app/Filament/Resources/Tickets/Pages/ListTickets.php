@@ -9,6 +9,7 @@ use Filament\Resources\Pages\ListRecords;
 class ListTickets extends ListRecords
 {
     protected static string $resource = TicketsResource::class;
+    protected static ?string $recordTitleAttribute = 'Prioritas Tiket';
 
     protected function getHeaderActions(): array
     {

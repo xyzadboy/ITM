@@ -18,7 +18,7 @@ class ArsipsTable
                     ->label('Nomor Tiket')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('kategoriTiket.nama_kategori_tiket')
+                TextColumn::make('prioritas_tiket.nama_prioritas_tiket')
                     ->label('Kategori Tiket')
                     ->sortable(),
                 TextColumn::make('agent.nama')

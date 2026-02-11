@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\Tickets;
 use App\Models\Arsip;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 
@@ -33,7 +34,7 @@ class TicketObserver
                     'no_tiket' => $ticket->nomor_tiket,
                     'pelapor_id' => $ticket->pelapor_id,
                     'agent_id' => $ticket->agent_id,
-                    'kategori_tiket_id' => $ticket->kategori_tiket_id,
+                    'prioritas_id' => $ticket->prioritas_id,
                     'deskripsi' => $ticket->deskripsi,
                     'resolved_at' => now(),
                 ]);

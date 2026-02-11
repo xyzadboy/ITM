@@ -2,10 +2,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tickets;
+use App\Models\Departemen;
 use App\Models\KategoriTiket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
+use App\Models\Arsip;
 
 class TiketController extends Controller
 {
@@ -15,6 +18,7 @@ class TiketController extends Controller
             ->latest()
             ->get();
         $kategoriTiket = KategoriTiket::all();
+        $departemen = Departemen::all();
 
         if ($request->isMethod('post')) {
 
