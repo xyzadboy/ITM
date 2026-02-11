@@ -14,15 +14,62 @@
 .fi-body{
     @apply bg-main-primary text-main-black;
 }
+.dark .fi-body {
+    background-color: rgb(24, 24, 27); /* zinc-900 style */
+    color: rgb(244, 244, 245); /* zinc-100 */
+}
 .fi-topbar{
     @apply bg-main-primary shadow-none ring-0;
+}
+.fi-topbar .fi-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.dark .fi-topbar {
+    background-color: rgb(24, 24, 27);
 }
 .fi-sidebar-nav{
     @apply bg-main-white;
 }
+.dark .fi-sidebar-nav {
+    background-color: rgb(39, 39, 42); /* zinc-800 */
+}
 .fi-sidebar {
-    @apply m-4 rounded-3xl shadow-xl border-none sticky top-4 overflow-hidden h-auto;
+    @apply m-4 rounded-3xl shadow-xl border-none sticky top-4 overflow-hidden h-auto w-auto transition-all duration-350 ease-in-out;
 
-    /* max-height: calc(100vh - 2rem); */
 }
 
+.fi-main::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    /* background: rgba(0,0,0,0.15); */
+    backdrop-filter: blur(3px);
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+    pointer-events: none;
+}
+.dark .fi-main::after {
+    background: rgba(0,0,0,0.2);
+}
+
+.fi-layout:has(.fi-sidebar:hover) .fi-main::after {
+    opacity: 1;
+}
+.fi-sidebar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+}
+/* Smooth theme transition */
+.fi-body,
+.fi-topbar,
+.fi-sidebar-nav,
+.fi-main,
+.fi-main::after {
+    transition:
+        background-color 300ms ease-in-out,
+        color 300ms ease-in-out,
+        border-color 300ms ease-in-out,
+        box-shadow 300ms ease-in-out;
+}

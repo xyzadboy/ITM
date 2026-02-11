@@ -18,7 +18,7 @@
 
                 <div class="mb-4">
                     <select wire:model="departemen_id"
-                        class="w-full mt-1 rounded-lg border-gray-300">
+                        class="w-full mt-1 rounded-lg border-black-300">
                         <option value="">-- Pilih Departemen --</option>
                         @foreach ($departemen as $dep)
                             <option value="{{ $dep->id }}">
@@ -29,7 +29,7 @@
                     <label class="block text-sm font-medium">Kategori Tiket</label>
 
                    <select wire:model="prioritas_tiket_id"
-                        class="w-full mt-1 rounded-lg border-gray-300"
+                        class="w-full mt-1 rounded-lg border-black-300"
                         @disabled(!$departemen_id)>
                         <option value="">-- Pilih Kategori --</option>
 
@@ -46,7 +46,7 @@
 
                 <div class="mb-4">
                     <label class="block text-sm font-medium">Deskripsi</label>
-                    <textarea wire:model="deskripsi"class="w-full mt-1 rounded-lg border-gray-300" rows="3"></textarea>
+                    <textarea wire:model="deskripsi"class="w-full mt-1 rounded-lg border-black-300" rows="3"></textarea>
                     @error('deskripsi')
                         <span class="text-red-500 text-xs">{{ $message }}</span>
                     @enderror
