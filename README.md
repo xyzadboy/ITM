@@ -63,4 +63,34 @@ Sistem ini mengadopsi praktik terbaik dari framework IT Service Management seper
 3. Memberi tugas Otomatis Kepada agent yang tersedia  
 4. Teknisi melakukan penanganan  
 5. Status diperbarui hingga selesai  
-6. Tiket ditutup dan didokumentasikan  
+6. Tiket ditutup dan didokumentasikan
+
+---
+## 📸 Tampilan Sistem
+
+### 🔐 Login Page
+![Login](dokumentasi/login_page.png)
+
+### 🏠 Dashboard / Frontend
+![Frontend](dokumentasi/frontend.png)
+
+### 🎫 Manajemen Tiket
+![Tiket](dokumentasi/tiket.png)
+
+### 📊 Prioritas Tiket
+![Prioritas](dokumentasi/prioritas_tiket.png)
+
+### 👨‍💼 Data Pegawai
+![Pegawai](dokumentasi/data_pegawai.png)
+
+### 🏢 Departemen
+![Departemen](dokumentasi/departemen.png)
+
+### 🗂️ Arsip
+![Arsip](dokumentasi/arsip.png)
+
+### 👤 User Management
+![User](dokumentasi/User.png)
+
+### 🔔 Notifikasi Telegram
+![Notif](dokumentasi/notif_tele.png)
