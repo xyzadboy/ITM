@@ -40,33 +40,19 @@ Sistem ini mengadopsi praktik terbaik dari framework IT Service Management seper
 - Assign tiket ke teknisi  
 
 ### 🚨 Manajemen Insiden
-- Kategorisasi insiden  
-- Penentuan prioritas (Low, Medium, High)  
-- SLA monitoring  
-
-### 👥 Role Management
-- Admin  
-- User / Pelapor  
-- Teknisi  
-
-### 📊 Dashboard & Monitoring
-- Statistik tiket  
-- Performa penyelesaian  
-- Monitoring real-time  
-
+- Kategorisasi insiden
+  
 ### 🔔 Notifikasi
-- Update status tiket  
-- Reminder penanganan  
+- Integrasi dengan Bot Telegram  
 
 ---
 
 ## 🏗️ Teknologi yang Digunakan
 
 - **Framework**: Laravel  
-- **Backend**: PHP  
-- **Database**: MySQL / PostgreSQL  
-- **Frontend**: Blade / Livewire / (opsional Vue/React)  
-- **Authentication**: Laravel Auth / Multi Auth  
+- **Backend**: PHP/Filamentphp  
+- **Database**: MySQL 
+- **Frontend**: Blade / Livewire
 
 ---
 
@@ -74,67 +60,7 @@ Sistem ini mengadopsi praktik terbaik dari framework IT Service Management seper
 
 1. User melaporkan insiden  
 2. Sistem membuat tiket  
-3. Admin mengkategorikan & menentukan prioritas  
-4. Tiket ditugaskan ke teknisi  
-5. Teknisi melakukan penanganan  
-6. Status diperbarui hingga selesai  
-7. Tiket ditutup dan didokumentasikan  
-
----
-
-## 🧩 Struktur Modul
-
-- Manajemen User  
-- Manajemen Tiket  
-- Kategori & Prioritas  
-- Departemen  
-- Laporan & Analitik  
-
----
-
-## 🚀 Instalasi
-
-```bash
-git clone https://github.com/username/incident-ticket-management.git
-cd incident-ticket-management
-
-composer install
-cp .env.example .env
-php artisan key:generate
-
-# konfigurasi database di file .env
-
-php artisan migrate
-php artisan serve
-```
-
----
-
-## 🔐 Akun Default (Opsional)
-
-| Role   | Email            | Password |
-|--------|----------------|----------|
-| Admin  | admin@mail.com | password |
-| User   | user@mail.com  | password |
-
----
-
-## 📈 Pengembangan Selanjutnya
-
-- Integrasi email & WhatsApp notification  
-- API untuk mobile app  
-- Machine learning untuk prediksi incident  
-- Integrasi dengan monitoring tools  
-
----
-
-## 🤝 Kontribusi
-
-Kontribusi sangat terbuka untuk pengembangan lebih lanjut.  
-Silakan fork repository ini dan ajukan pull request.
-
----
-
-## 📄 Lisensi
-
-Project ini menggunakan lisensi MIT.
+3. Memberi tugas Otomatis Kepada agent yang tersedia  
+4. Teknisi melakukan penanganan  
+5. Status diperbarui hingga selesai  
+6. Tiket ditutup dan didokumentasikan  
