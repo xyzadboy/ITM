@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('username')->unique()->nullable();
             $table->string('password')->nullable();
+            $table->string('telegram_chat_id')->nullable();
             $table->timestamps();
         });
     }

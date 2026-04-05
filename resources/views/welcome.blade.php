@@ -38,10 +38,10 @@
                 <a href="#" class="hover:text-white transition">Works</a>
                 <a href="#" class="hover:text-white transition">Services</a>
                 <a href="#" class="hover:text-white transition">About</a>
-            </div>
-            <button class="bg-white/10 border border-white/20 text-white px-6 py-2 rounded-full backdrop-blur-md hover:bg-white hover:text-black transition-all duration-300">
+            </div><a href="login"><button class="bg-white/10 border border-white/20 text-white px-6 py-2 rounded-full backdrop-blur-md hover:bg-white hover:text-black transition-all duration-300">
                 Contact
-            </button>
+            </button></a>
+            
         </nav>
 
         <section class="text-center">

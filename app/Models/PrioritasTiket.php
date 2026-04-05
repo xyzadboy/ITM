@@ -16,7 +16,6 @@ class PrioritasTiket extends Model
     protected $fillable = [
         'nama_prioritas_tiket',
         'departemen_id',
-        'level_prioritas',
         'keterangan',
     ];
 
@@ -32,6 +31,6 @@ class PrioritasTiket extends Model
         
         public function departemen()
     {
-        return $this->belongsTo(\App\Models\Departemen::class);
+        return $this->belongsTo(Departemen::class, 'departemen_id');
     }
 }

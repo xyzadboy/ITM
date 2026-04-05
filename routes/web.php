@@ -19,9 +19,7 @@ Route::get('/login', function () {
 Route::get('/tiket', \App\Livewire\TiketFrontend::class);
 
 
-// Route::get('/login', fn () => view('login'))->name('login');
-// Route::post('/login', [PegawaiLoginController::class, 'login']);
-// Route::post('/logout', [PegawaiLoginController::class, 'logout'])->name('pegawai.logout');
+
 
 Route::post('/login', [PegawaiLoginController::class, 'login'])
     ->name('login.post');

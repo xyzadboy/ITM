@@ -14,12 +14,13 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
 
 class PrioritasTiketResource extends Resource
 {
     protected static ?string $model = PrioritasTiket::class;
     
-    protected static bool $shouldRegisterNavigation = false;
+    // protected static bool $shouldRegisterNavigation = false;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
@@ -31,11 +32,14 @@ class PrioritasTiketResource extends Resource
                 ->label('Nama Prioritas Tiket')
                 ->required()
                 ->maxLength(255),
-            TextInput::make('level_prioritas')
-                ->required(),
+
             TextInput::make('keterangan')
                 ->label('Keterangan')
                 ->maxLength(255),
+            Select::make('departemen_id')
+                ->label('Departemen')
+                ->required()
+                ->relationship('departemen', 'nama_departemen'),
         ]);
     }
 

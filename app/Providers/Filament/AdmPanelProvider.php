@@ -20,6 +20,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use App\http\Middleware\AdminSession;
 
 
 class AdmPanelProvider extends PanelProvider
@@ -37,7 +38,7 @@ class AdmPanelProvider extends PanelProvider
             ->passwordReset()
             ->globalSearch(false)
             ->emailVerification()
-            // ->authguard('web')
+            ->authguard('web')
             ->emailChangeVerification()
             ->colors([
                 'primary' => Color::Amber,
@@ -61,6 +62,7 @@ class AdmPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                AdminSession::class,
             ])
             ->authMiddleware([
                 Authenticate::class,

@@ -40,9 +40,13 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'pegawai' => [
+    'pegawai' => [
         'driver' => 'session',
         'provider' => 'pegawai',
+        ],
+    'admin' => [
+    'driver' => 'session',
+    'provider' => 'users',
         ],
     ],
    

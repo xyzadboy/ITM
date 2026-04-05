@@ -7,6 +7,7 @@ use carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use App\Models\Departemen;
 use App\Models\Tickets;
 use App\Models\PrioritasTiket;
@@ -51,58 +52,76 @@ class TiketFrontend extends Component
     ];
 
  
-    public function submit()
+public function submit()
 {
     $this->validate([
         'prioritas_tiket_id' => 'required',
         'deskripsi' => 'required',
     ]);
 
-    // ambil departemen dari kategori tiket
+    // Ambil prioritas tiket
     $prioritas = PrioritasTiket::find($this->prioritas_tiket_id);
 
+    // Ambil agent yang sedang busy
     $busyAgentIds = Tickets::where('status', 'in progress')
         ->whereNotNull('agent_id')
         ->pluck('agent_id');
-    // cari agent yang FREE
-    $today = Carbon::today();
 
+    // Cari agent yang available berdasarkan departemen & beban kerja hari ini
     $agent = Pegawai::query()
         ->where('pegawai.departemen_id', $prioritas->departemen_id)
-
-        ->whereNotIn('pegawai.id', $busyAgentIds) // hanya agent available
+        ->whereNotIn('pegawai.id', $busyAgentIds)
         ->leftJoin('arsip', function ($join) {
             $join->on('pegawai.id', '=', 'arsip.agent_id')
-                ->whereDate('arsip.created_at', Carbon::today());
+                ->whereDate('arsip.created_at', \Carbon\Carbon::today());
         })
         ->select(
             'pegawai.*',
             \DB::raw('COUNT(arsip.id) as total_arsip_hari_ini')
         )
         ->groupBy('pegawai.id')
-        ->orderBy('total_arsip_hari_ini', 'asc') // paling sedikit dulu
-        ->orderBy('pegawai.id', 'asc') // biar stabil
+        ->orderBy('total_arsip_hari_ini', 'asc')
+        ->orderBy('pegawai.id', 'asc')
         ->first();
-    
-    // $agent = Pegawai::whereHas('departemen', function ($q) use ($prioritas) {
-    //         $q->where('id', $prioritas->departemen_id);
-    //     })
-    //     ->whereNotIn('id', function ($q) {
-    //         $q->select('agent_id')
-    //           ->from('tickets')
-    //           ->where('status', 'in progress')
-    //           ->whereNotNull('agent_id');
-    //     })
-    //     ->first(); // ambil 1 agent saja
-    Tickets::create([
-        'nomor_tiket' => 'TKT-' . Str::upper(Str::random(8)),
-        'pelapor_id' => Auth::id(),
+
+    // Buat tiket
+    $ticket = Tickets::create([
+        'nomor_tiket' => 'TKT-' . \Illuminate\Support\Str::upper(\Illuminate\Support\Str::random(8)),
+        'pelapor_id' => \Illuminate\Support\Facades\Auth::id(),
         'prioritas_tiket_id' => $this->prioritas_tiket_id,
-        'agent_id' => $agent?->id, // 🔥 otomatis
+        'agent_id' => $agent?->id,
         'deskripsi' => $this->deskripsi,
         'status' => $agent ? 'in progress' : 'open',
     ]);
 
+    // ===============================
+    // 🔔 KIRIM NOTIFIKASI TELEGRAM
+    // ===============================
+    if ($agent && $agent->telegram_chat_id) {
+
+        Http::post(
+            "https://api.telegram.org/bot" . env('TELEGRAM_BOT_TOKEN') . "/sendMessage",
+            [
+                'chat_id' => $agent->telegram_chat_id,
+                'text' => "🎫 TIKET BARU\n\n"
+                    . "Nomor: {$ticket->nomor_tiket}\n"
+                    . "Prioritas: {$ticket->prioritas_tiket_id}\n\n"
+                    . "Deskripsi:\n{$ticket->deskripsi}",
+                'reply_markup' => json_encode([
+                    'inline_keyboard' => [
+                        [
+                            [
+                                'text' => '✅ Resolve',
+                                'callback_data' => 'resolve_' . $ticket->id
+                            ]
+                        ]
+                    ]
+                ])
+            ]
+        );
+    }
+
+    // Reset form
     $this->reset(['prioritas_tiket_id', 'deskripsi']);
 
     session()->flash('success', 'Tiket berhasil dikirim');

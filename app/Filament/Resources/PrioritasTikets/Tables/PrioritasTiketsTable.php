@@ -17,10 +17,12 @@ class PrioritasTiketsTable
                 TextColumn::make('nama_prioritas_tiket')
                     ->label('Nama Prioritas Tiket')
                     ->searchable(),
-                TextColumn::make('level_prioritas')
+                TextColumn::make('departemen.nama_departemen')
+                    ->label('Departemen')
                     ->searchable(),
                 TextColumn::make('keterangan')
-                    ->searchable(),
+                    ->searchable()
+                    ->default('-'),
             ])
             ->filters([
                 //

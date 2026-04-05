@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('nama_prioritas_tiket');
             $table->foreignId('departemen_id')->constrained('departemen')->onDelete('cascade');
-            $table->string('level_prioritas');
             $table->string('keterangan')->nullable();
             $table->timestamps();
         });

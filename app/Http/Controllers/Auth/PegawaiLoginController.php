@@ -44,7 +44,7 @@ class PegawaiLoginController extends Controller
     {
         Auth::guard('pegawai')->logout();
 
-        $request->session()->invalidate();
+        // $request->session()->invalidate();
         $request->session()->regenerateToken();
 
         return redirect()->route('login');

@@ -1,0 +1,12 @@
+karna masih pake gratisan untuk hostingnya jadi
+
+buat hapus webhook lama
+https://api.telegram.org/bot<TOKEN_KAMU>/deleteWebhook
+https://api.telegram.org/bot8264454923:AAFQCzyL6XoHNBnKsc8Qu5ijiWWRInEifao/deleteWebhook
+
+baru setting baru pakai webhook baru karna setiap start server link akan berubah ubah
+https://api.telegram.org/bot<TOKEN_KAMU>/setWebhook?url=<link>/api/telegram/webhook
+https://api.telegram.org/bot8264454923:AAFQCzyL6XoHNBnKsc8Qu5ijiWWRInEifao/setWebhook?url=https://trial-reed-proof-participating.trycloudflare.com/api/telegram/webhook
+
+mulai server/tunnel cloudflare
+cloudflared tunnel --url http://localhost:8000 (sesuaikan portnya)
