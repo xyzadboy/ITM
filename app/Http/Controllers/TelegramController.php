@@ -52,4 +52,24 @@ class TelegramController extends Controller
 
         return response()->json(['status' => 'ok']);
     }
+   public static function sendMessage($chatId, $text, $keyboard = null)
+{
+    $botToken = config('services.telegram.bot_token');
+
+    $payload = [
+        'chat_id' => $chatId,
+        'text' => $text,
+        'parse_mode' => 'HTML',
+    ];
+
+    if ($keyboard) {
+        $payload['reply_markup'] = json_encode($keyboard);
+    }
+
+    return \Illuminate\Support\Facades\Http::post(
+        "https://api.telegram.org/bot{$botToken}/sendMessage",
+        $payload
+    );
+
+}
 }

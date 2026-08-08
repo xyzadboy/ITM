@@ -34,6 +34,22 @@ class TiketController extends Controller
                 'deskripsi' => $request->deskripsi,
                 'status' => 'waiting for response',
             ]);
+            $groupChatId = config('services.telegram.group_chat_id');
+
+TelegramController::sendMessage(
+    $groupChatId,
+    "🎫 <b>Tiket Baru!</b>\n"
+    . "Nomor: {$ticket->nomor_tiket}\n"
+    . "Deskripsi: {$ticket->deskripsi}\n"
+    . "Status: {$ticket->status}",
+    [
+        'inline_keyboard' => [[
+            ['text' => '✅ Resolve', 'callback_data' => 'resolve_' . $ticket->id]
+        ]]
+    ]
+);
+
+
 
             return redirect()
                 ->route('tiket.form')

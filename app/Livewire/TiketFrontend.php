@@ -105,7 +105,7 @@ public function submit()
                 'chat_id' => $agent->telegram_chat_id,
                 'text' => "🎫 TIKET BARU\n\n"
                     . "Nomor: {$ticket->nomor_tiket}\n"
-                    . "Prioritas: {$ticket->prioritas_tiket_id}\n\n"
+                    . "Kategori: {$ticket->prioritas_tiket_id}\n\n"
                     . "Deskripsi:\n{$ticket->deskripsi}",
                 'reply_markup' => json_encode([
                     'inline_keyboard' => [
@@ -120,6 +120,43 @@ public function submit()
             ]
         );
     }
+    // ===============================
+// 🔔 KIRIM NOTIFIKASI TELEGRAM KE GRUP
+// ===============================
+$groupChatId = config('services.telegram.group_chat_id');
+$botToken = config('services.telegram.bot_token');
+
+if ($groupChatId && $botToken) {
+
+    $response = Http::post(
+        "https://api.telegram.org/bot{$botToken}/sendMessage",
+        [
+            'chat_id' => $groupChatId,
+            'text' => "🎫 TIKET BARU\n\n"
+                . "Nomor: {$ticket->nomor_tiket}\n"
+                . "Prioritas: {$prioritas->nama}\n"
+                . "Agent: " . ($agent->nama ?? 'Belum ada agent') . "\n\n"
+                . "Deskripsi:\n{$ticket->deskripsi}",
+            'reply_markup' => json_encode([
+                'inline_keyboard' => [
+                    [
+                        [
+                            'text' => '✅ Resolve',
+                            'callback_data' => 'resolve_' . $ticket->id
+                        ]
+                    ]
+                ]
+            ])
+        ]
+    );
+
+    \Illuminate\Support\Facades\Log::info('Telegram response', $response->json() ?? []);
+} else {
+    \Illuminate\Support\Facades\Log::warning('Telegram config kosong', [
+        'group_chat_id' => $groupChatId,
+        'bot_token_set' => (bool) $botToken,
+    ]);
+}
 
     // Reset form
     $this->reset(['prioritas_tiket_id', 'deskripsi']);
