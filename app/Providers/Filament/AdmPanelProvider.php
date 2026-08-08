@@ -20,7 +20,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use App\http\Middleware\AdminSession;
+use App\Http\Middleware\AdminSession;
 
 
 class AdmPanelProvider extends PanelProvider

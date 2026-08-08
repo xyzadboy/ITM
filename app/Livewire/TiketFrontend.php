@@ -131,8 +131,8 @@ public function submit()
     public function render()
     {
         return view('livewire.tiket-frontend', [
-            'kategoriTiket' => KategoriTiket::all(),
-            'tikets' => Tickets::with(['kategori_tiket', 'agent'])
+            'kategoriTiket' => PrioritasTiket::all(),
+            'tikets' => Tickets::with(['prioritas_tiket', 'agent'])
                 ->latest()
                 ->get(),
         ]);
